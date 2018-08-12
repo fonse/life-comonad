@@ -20,7 +20,7 @@ instance Show Cell where
 
 -- | List of neighbors to the focused cell in the 'Grid' in clockwise order, starting from top-left.
 neighborhood :: Grid a -> [a]
-neighborhood grid = extract <$> ($ grid) <$> [nw, n, ne, e, se, s, sw, w]
+neighborhood grid = extract <$> shiftGrid grid <$> [(-1,-1), (-1,0), (-1,1), (0,1), (1,1), (1,0), (1,-1), (0,-1)]
 
 -- | Infinite list of all generations obtained by successively applying a set of rules to an initial 'Grid'.
 generations :: (Grid a -> a) -> Grid a -> [Grid a]
