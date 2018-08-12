@@ -24,7 +24,7 @@ neighborhood grid = extract <$> ($ grid) <$> [nw, n, ne, e, se, s, sw, w]
 
 -- | Infinite list of all generations obtained by successively applying a set of rules to an initial 'Grid'.
 generations :: (Grid a -> a) -> Grid a -> [Grid a]
-generations f grid = grid : generations f (extend f grid)
+generations f = iterate $ extend f
 
 -- | Rules for Conway's Game of Life.
 --
