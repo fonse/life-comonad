@@ -23,27 +23,29 @@ An infinite square grid focused on a specific cell.
 
 Represented by a function @(Int,Int) -> a@ which indicates the value of the grid for all points, along with a pair of coordinates to use as the focused cell.
 
+Positive directions are downwards for the first coordinate and to the right for the second one.
+
 For example:
 
 @
 gliderGrid = Store f (0,0) where
-  f (1,2) = 1
-  f (2,3) = 1
-  f (3,1) = 1
-  f (3,2) = 1
-  f (3,3) = 1
-  f _     = 0
+  f (0,1) = 'x'
+  f (1,2) = 'x'
+  f (2,0) = 'x'
+  f (2,1) = 'x'
+  f (2,2) = 'x'
+  f _     = ' '
 @
 -}
 type Grid a = Store (Int,Int) a
 
 -- | Show a section of the grid, spanning the given height and width with the focused cell as the upper-left corner.
 showGrid :: Show a => Int -> Int -> Grid a -> String
-showGrid height width (Store f (x,y)) = let cells = [ [ f (i,j) | j <- [x..x+height] ] | i <- [y..y+width] ]
+showGrid height width (Store f (i,j)) = let cells = [ [ f (i', j') | j' <- [j..j+height] ] | i' <- [i..i+width] ]
                                             join = foldr (++) ""
                                             showRow as = join (map show as) ++ "\n"
                                          in join (map showRow cells)
 
 -- | Shift the focused cell by the given displacement
 shiftGrid :: Grid a -> (Int, Int) -> Grid a
-shiftGrid (Store f (x,y)) (shiftX, shiftY) =  Store f (x + shiftX, y + shiftY)
+shiftGrid (Store f (i,j)) (shiftVertical, shiftHorizontal) =  Store f (i + shiftVertical, j + shiftHorizontal)
