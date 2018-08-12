@@ -1,6 +1,5 @@
 module Main where
 
-import Comonad
 import Grid
 import Life
 
