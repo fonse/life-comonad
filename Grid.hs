@@ -39,7 +39,7 @@ For example:
 @
 gliderGrid = Store f (0,0) where
   f (0,1) = 'x'
-  f (1,2) = 'x' import qualified Data.MemoCombinators as Memo
+  f (1,2) = 'x'
   f (2,0) = 'x'
   f (2,1) = 'x'
   f (2,2) = 'x'
