@@ -8,6 +8,7 @@ module Life
 
 import Grid
 import Comonad
+import qualified Data.MemoCombinators as Memo
 
 -- | A simple binary cell.
 --
@@ -24,7 +25,7 @@ neighborhood grid = extract <$> shiftGrid grid <$> [(-1,-1), (-1,0), (-1,1), (0,
 
 -- | Infinite list of all generations obtained by successively applying a set of rules to an initial 'Grid'.
 generations :: (Grid a -> a) -> Grid a -> [Grid a]
-generations f = iterate $ extend f
+generations f = iterate $ extend f . memorizeGrid
 
 -- | Rules for Conway's Game of Life.
 --
