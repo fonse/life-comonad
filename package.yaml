@@ -1,0 +1,49 @@
+name:                life-comonad
+version:             0.1.0.0
+github:              "githubuser/life-comonad"
+license:             BSD3
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2018 Author name here"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/life-comonad#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- ansi-terminal >= 0.8.0.4 && < 0.8.1
+- data-memocombinators >= 0.5.1 && < 0.6
+
+library:
+  source-dirs: src
+
+executables:
+  life-comonad-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - life-comonad
+
+tests:
+  life-comonad-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - life-comonad
