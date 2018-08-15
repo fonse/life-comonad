@@ -1,13 +1,23 @@
 module Main where
 
+import System.Console.ANSI
+import Data.Maybe
 import Grid
 import Life
 
-viewportWidth = 50
 viewportHeight = 20
+viewportWidth = 50
 
 main :: IO ()
-main = mapM_ putStr . map (showGrid viewportHeight viewportWidth) $ (life initialGrid)
+main = do
+  hideCursor
+  mapM_ showGeneration (life initialGrid)
+
+showGeneration :: Grid Cell -> IO ()
+showGeneration grid = do
+  clearScreen
+  setCursorPosition 0 0
+  putStr $ showGrid viewportHeight viewportWidth grid
 
 initialGrid :: Grid Cell
 initialGrid = Store f (0,0) where
